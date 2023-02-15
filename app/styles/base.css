@@ -1,0 +1,103 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  textarea,
+  input[type] {
+    @apply w-full border-none bg-transparent p-0;
+  }
+  textarea:focus,
+  input[type]:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  svg {
+    @apply w-full;
+  }
+}
+
+@layer components {
+  .typewriter {
+    border-right: 0.5em solid currentColor;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: currentColor;
+    }
+  }
+}
+
+/* Default colors: light */
+:root,
+body.light {
+  --background: 255 255 255;
+  --text: 23 45 92;
+  --text-invert: 255 255 255;
+  --primary-dark: 23 45 92;
+  --primary-normal: 37 78 168;
+  --primary-light: 102 145 238;
+}
+body.dark {
+  --background: 0 0 0;
+  --text: 255 255 255;
+  --primary-dark: 138 89 6;
+  --primary-normal: 172 132 65;
+  --primary-light: 184 156 109;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: 255 255 255;
+    --text: 23 45 92;
+    --text-invert: 255 255 255;
+    --primary-dark: 23 45 92;
+    --primary-normal: 37 78 168;
+    --primary-light: 102 145 238;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 0 0 0;
+    --text: 255 255 255;
+    --primary-dark: 138 89 6;
+    --primary-normal: 172 132 65;
+    --primary-light: 184 156 109;
+  }
+}
+
+/* theme toggle */
+body {
+  @apply transition-colors duration-[0.05s];
+}
+[data-theme] {
+  @apply hidden cursor-pointer items-center gap-4;
+}
+@media (prefers-color-scheme: light) {
+  [data-theme="light"] {
+    @apply flex;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme="dark"] {
+    @apply flex;
+  }
+}
+.light [data-theme="light"] {
+  @apply flex;
+}
+.light [data-theme="dark"] {
+  @apply hidden;
+}
+.dark [data-theme="dark"] {
+  @apply flex;
+}
+.dark [data-theme="light"] {
+  @apply hidden;
+}
